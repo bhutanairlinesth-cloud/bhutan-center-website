@@ -120,5 +120,3 @@ Soft luxury / Champagne Gold redesign with warm ivory surfaces, gold accents, No
 - Entire card is now clickable
 - Arrow button is no longer the only click target
 - Cleaner footer with clearer CTA
-
-- Official Bhutan Center logo supplied by the client is used in Header and Footer.

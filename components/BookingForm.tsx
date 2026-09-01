@@ -21,25 +21,69 @@ export default function BookingForm({ compact = false, defaultPackage = "" }: { 
   }
 
   if (status === "sent") {
-    return <div className="form-success"><strong>ส่งข้อมูลเรียบร้อย</strong><p>ทีม Bhutan Center จะติดต่อกลับเพื่อช่วยวางแผนการเดินทางของคุณ</p></div>;
+    return (
+      <div className="form-success">
+        <span className="form-success__icon">✓</span>
+        <strong>ส่งข้อมูลเรียบร้อย</strong>
+        <p>ทีม Bhutan Center จะติดต่อกลับเพื่อช่วยวางแผนการเดินทางของคุณ</p>
+      </div>
+    );
+  }
+
+  if (compact) {
+    return (
+      <form className="booking-form booking-form--compact" onSubmit={submit}>
+        <div className="form-field"><label htmlFor="compact-name">ชื่อ–นามสกุล</label><input id="compact-name" name="name" placeholder="ชื่อผู้ติดต่อ" required /></div>
+        <div className="form-field"><label htmlFor="compact-date">วันที่อยากเดินทาง</label><input id="compact-date" name="travel_date" type="date" /></div>
+        <div className="form-field"><label htmlFor="compact-pax">จำนวนผู้เดินทาง</label><input id="compact-pax" name="pax" type="number" min="1" placeholder="เช่น 4" /></div>
+        <div className="form-field"><label htmlFor="compact-contact">โทรศัพท์ / LINE</label><input id="compact-contact" name="contact" placeholder="เบอร์โทรหรือ LINE ID" required /></div>
+        <button className="form-submit form-submit--compact" type="submit" disabled={status === "sending"}>{status === "sending" ? "กำลังส่ง..." : <>ให้ทีมช่วยวางแผน <span>→</span></>}</button>
+        {status === "error" && <p className="form-status form-status--error">ส่งข้อมูลไม่สำเร็จ กรุณาลองอีกครั้งหรือติดต่อทีมงานทาง LINE</p>}
+      </form>
+    );
   }
 
   return (
-    <form className={`booking-form ${compact ? "booking-form--compact" : ""}`} onSubmit={submit}>
-      <label><span>ชื่อ–นามสกุล</span><input name="name" placeholder="ชื่อผู้ติดต่อ" required /></label>
-      <label><span>วันที่อยากเดินทาง</span><input name="travel_date" type="date" /></label>
-      {compact ? <label><span>จำนวนผู้เดินทาง</span><input name="pax" type="number" min="1" placeholder="เช่น 4" /></label> : <>
-        <label><span>ผู้ใหญ่</span><input name="adults" type="number" min="1" defaultValue="2" /></label>
-        <label><span>เด็ก</span><input name="children" type="number" min="0" defaultValue="0" /></label>
-      </>}
-      {!compact && <label><span>แพ็กเกจที่สนใจ</span><select name="package_slug" defaultValue={defaultPackage}><option value="">ยังไม่แน่ใจ / ให้ทีมแนะนำ</option><option value="journey-to-bhutan">Journey to Bhutan 4D3N</option><option value="wonders-of-bhutan">Wonders of Bhutan 5D4N</option><option value="the-ultimate-bhutan">The Ultimate Bhutan 6D5N</option><option value="custom">ออกแบบทริปใหม่</option></select></label>}
-      {!compact && <label><span>ระดับโรงแรม</span><select name="hotel_level" defaultValue="3"><option value="3">Tourist Class / 3-star</option><option value="4">4-star</option><option value="5">5-star / Luxury</option><option value="custom">ให้ทีมแนะนำ</option></select></label>}
-      {!compact && <label><span>ชั้นโดยสาร</span><select name="cabin_class" defaultValue="economy"><option value="economy">Economy Class</option><option value="business">Business Class</option></select></label>}
-      <label><span>โทรศัพท์ / LINE</span><input name="contact" placeholder="เบอร์โทรหรือ LINE ID" required /></label>
-      {!compact && <label className="full"><span>รายละเอียดเพิ่มเติม</span><textarea name="note" rows={4} placeholder="เช่น มีผู้สูงอายุ ต้องการโรงแรมเฉพาะ หรืออยากเพิ่มกิจกรรม" /></label>}
-      <button className="button full" type="submit" disabled={status === "sending"}>{status === "sending" ? "กำลังส่ง..." : <>ให้เจ้าหน้าที่ช่วยวางแผน <span>→</span></>}</button>
-      {status === "error" && <small className="form-note full">ส่งข้อมูลไม่สำเร็จ กรุณาลองอีกครั้งหรือติดต่อทีมงานทาง LINE</small>}
-      <small className="form-note full">เมื่อเชื่อม Bhutan Pricing แล้ว แบบฟอร์มนี้จะสร้าง Lead/Customer Tracking ในหลังบ้านโดยตรง</small>
+    <form className="booking-form booking-form--full" onSubmit={submit}>
+      <div className="booking-form__heading">
+        <span>TRIP DETAILS</span>
+        <h2>ข้อมูลสำหรับวางแผนทริป</h2>
+        <p>กรอกเท่าที่ทราบได้เลย หากยังไม่แน่ใจบางข้อ ทีมงานช่วยแนะนำให้ภายหลังได้</p>
+      </div>
+
+      <section className="form-section">
+        <div className="form-section__title"><span>01</span><div><strong>ข้อมูลผู้ติดต่อ</strong><small>สำหรับส่งรายละเอียดและใบเสนอราคา</small></div></div>
+        <div className="form-grid">
+          <div className="form-field"><label htmlFor="name">ชื่อ–นามสกุล <b>*</b></label><input id="name" name="name" placeholder="ชื่อผู้ติดต่อ" required /></div>
+          <div className="form-field"><label htmlFor="contact">โทรศัพท์ / LINE <b>*</b></label><input id="contact" name="contact" placeholder="เบอร์โทรหรือ LINE ID" required /></div>
+        </div>
+      </section>
+
+      <section className="form-section">
+        <div className="form-section__title"><span>02</span><div><strong>วันเดินทางและจำนวนคน</strong><small>ใช้สำหรับคำนวณราคาและจัดเส้นทาง</small></div></div>
+        <div className="form-grid form-grid--three">
+          <div className="form-field"><label htmlFor="travel_date">วันที่อยากเดินทาง</label><input id="travel_date" name="travel_date" type="date" /></div>
+          <div className="form-field"><label htmlFor="adults">ผู้ใหญ่</label><input id="adults" name="adults" type="number" min="1" defaultValue="2" /></div>
+          <div className="form-field"><label htmlFor="children">เด็ก</label><input id="children" name="children" type="number" min="0" defaultValue="0" /></div>
+        </div>
+      </section>
+
+      <section className="form-section">
+        <div className="form-section__title"><span>03</span><div><strong>รูปแบบทริปที่สนใจ</strong><small>เลือกคร่าว ๆ ก่อน แล้วปรับรายละเอียดภายหลังได้</small></div></div>
+        <div className="form-grid">
+          <div className="form-field form-field--wide"><label htmlFor="package_slug">แพ็กเกจที่สนใจ</label><select id="package_slug" name="package_slug" defaultValue={defaultPackage}><option value="">ยังไม่แน่ใจ / ให้ทีมแนะนำ</option><option value="journey-to-bhutan">Journey to Bhutan · 4 วัน 3 คืน</option><option value="wonders-of-bhutan">Wonders of Bhutan · 5 วัน 4 คืน</option><option value="the-ultimate-bhutan">The Ultimate Bhutan · 6 วัน 5 คืน</option><option value="custom">ออกแบบทริปใหม่</option></select></div>
+          <div className="form-field"><label htmlFor="hotel_level">ระดับโรงแรม</label><select id="hotel_level" name="hotel_level" defaultValue="3"><option value="3">Tourist Class / 3-star</option><option value="4">4-star</option><option value="5">5-star / Luxury</option><option value="custom">ให้ทีมแนะนำ</option></select></div>
+          <div className="form-field"><label htmlFor="cabin_class">ชั้นโดยสาร</label><select id="cabin_class" name="cabin_class" defaultValue="economy"><option value="economy">Economy Class</option><option value="business">Business Class</option></select></div>
+          <div className="form-field form-field--wide"><label htmlFor="note">รายละเอียดเพิ่มเติม <span>ไม่บังคับ</span></label><textarea id="note" name="note" rows={5} placeholder="เช่น มีผู้สูงอายุ อยากพักโรงแรมเฉพาะ ต้องการเพิ่มกิจกรรม หรือมีข้อจำกัดด้านอาหาร" /></div>
+        </div>
+      </section>
+
+      <div className="form-action">
+        <div><strong>พร้อมให้เราช่วยวางแผน</strong><p>ทีมงานจะนำข้อมูลนี้ไปจัดทางเลือกและราคาให้เหมาะกับวันเดินทางจริง</p></div>
+        <button className="form-submit" type="submit" disabled={status === "sending"}>{status === "sending" ? "กำลังส่ง..." : <>ส่งข้อมูลให้ทีมงาน <span>→</span></>}</button>
+      </div>
+
+      {status === "error" && <p className="form-status form-status--error">ส่งข้อมูลไม่สำเร็จ กรุณาลองอีกครั้งหรือติดต่อทีมงานทาง LINE</p>}
     </form>
   );
 }
