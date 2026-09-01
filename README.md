@@ -1,4 +1,4 @@
-# Bhutan Center V2
+# Bhutan Center V3 — Modern
 
 Modern Next.js redesign for Bhutan Center, prepared for GitHub + Vercel and designed to connect to the existing Bhutan Pricing backend.
 
@@ -77,3 +77,8 @@ The migration strategy is to preserve existing URLs where possible, not to renam
 This build is specifically compatible with GitHub's browser uploader.
 It intentionally contains no folders named `[slug]` or `[...legacy]`.
 Public package URLs still remain `/packages/<slug>` through Next.js rewrites.
+
+
+## V3 Design refresh
+
+Modern editorial / luxury-travel front-end. SEO Center, Wix URL preservation, pricing integration hooks, sitemap, robots and admin features remain intact.

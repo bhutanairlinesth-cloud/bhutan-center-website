@@ -1,6 +1,6 @@
 {
   "name": "bhutan-center-v2",
-  "version": "0.2.0-seo",
+  "version": "0.3.0-modern",
   "private": true,
   "scripts": {
     "dev": "next dev",
