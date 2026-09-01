@@ -1,6 +1,6 @@
 {
-  "name": "bhutan-center-v5-neon-map",
-  "version": "0.5.0-neon-map",
+  "name": "bhutan-center-v8-soft-premium",
+  "version": "0.8.0-soft-premium",
   "private": true,
   "scripts": {
     "dev": "next dev",

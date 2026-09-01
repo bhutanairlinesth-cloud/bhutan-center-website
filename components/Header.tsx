@@ -8,11 +8,11 @@ import { publicPaths } from "@/lib/public-paths";
 
 const nav = [
   { href: publicPaths.packages, label: "แพ็กเกจ" },
-  { href: publicPaths.destinations, label: "สำรวจภูฏาน" },
+  { href: publicPaths.destinations, label: "เที่ยวภูฏาน" },
   { href: "/bhutan-airlines", label: "Bhutan Airlines" },
   { href: publicPaths.hotels, label: "โรงแรม" },
-  { href: publicPaths.visa, label: "Visa & SDF" },
-  { href: publicPaths.journal, label: "Journal" },
+  { href: publicPaths.travelInfo, label: "ก่อนเดินทาง" },
+  { href: publicPaths.journal, label: "บทความ" },
 ];
 
 export default function Header() {
@@ -23,29 +23,17 @@ export default function Header() {
   return (
     <header className="site-header">
       <div className="nav-shell">
-        <Link href="/" className="nav-brand" onClick={() => setOpen(false)}>
+        <Link href="/" className="nav-brand" onClick={() => setOpen(false)} aria-label="Bhutan Center home">
           <BrandMark />
         </Link>
-
-        <nav className={`nav-main ${open ? "open" : ""}`}>
-          {nav.map((item) => (
-            <Link key={item.href} href={item.href} onClick={() => setOpen(false)}>
-              {item.label}
-            </Link>
-          ))}
-          <Link className="mobile-only" href={publicPaths.contact} onClick={() => setOpen(false)}>
-            ติดต่อเรา
-          </Link>
+        <nav className={`nav-main ${open ? "open" : ""}`} aria-label="Main navigation">
+          {nav.map((item) => <Link href={item.href} key={item.href} onClick={() => setOpen(false)}>{item.label}</Link>)}
+          <Link className="nav-mobile-contact" href={publicPaths.contact} onClick={() => setOpen(false)}>ติดต่อเรา</Link>
         </nav>
-
         <div className="nav-actions">
-          <Link href="/partner" className="nav-agent">For Agent</Link>
-          <Link href={publicPaths.booking} className="neon-button neon-button--small">
-            วางแผนทริป <span>↗</span>
-          </Link>
-          <button className="nav-toggle" onClick={() => setOpen(!open)} aria-label="Toggle navigation">
-            <i></i><i></i>
-          </button>
+          <Link className="nav-contact" href={publicPaths.contact}>ติดต่อเรา</Link>
+          <Link className="gold-button gold-button--nav" href={publicPaths.booking}>วางแผนทริป <span>↗</span></Link>
+          <button className="nav-toggle" onClick={() => setOpen(!open)} aria-label="เปิดเมนู" aria-expanded={open}><i></i><i></i></button>
         </div>
       </div>
     </header>

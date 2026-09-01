@@ -1,6 +1,5 @@
 import Link from "next/link";
-import BhutanCityExplorer from "@/components/BhutanCityExplorer";
-import PackageDashboard from "@/components/PackageDashboard";
+import PackageCard from "@/components/PackageCard";
 import BookingForm from "@/components/BookingForm";
 import { getPublicPackages } from "@/lib/pricing-source";
 import { metadataForPath } from "@/lib/seo-config";
@@ -11,104 +10,82 @@ export async function generateMetadata() {
   return metadataForPath("/", seo.pages);
 }
 
+const services = [
+  ["01", "Bhutan Airlines", "เช็กเที่ยวบินและชั้นโดยสารให้เข้ากับวันเดินทางของคุณ"],
+  ["02", "Visa + SDF", "ดูแลเอกสาร วีซ่า และค่าธรรมเนียมที่จำเป็นก่อนเข้าประเทศ"],
+  ["03", "Hotels", "เลือกมาตรฐาน 3–5 ดาว หรือระบุโรงแรมที่ต้องการได้"],
+  ["04", "Private Guide & Car", "ไกด์และรถส่วนตัวตลอดเส้นทางตามโปรแกรม"],
+];
+
+const cities = [
+  ["Paro", "พาโร", "Tiger’s Nest · Paro Dzong · National Museum"],
+  ["Thimphu", "ทิมพู", "Buddha Dordenma · Memorial Chorten · Tashichho Dzong"],
+  ["Punakha", "พูนาคา", "Punakha Dzong · Dochula Pass · Chimi Lhakhang"],
+  ["Gangtey", "กังเต", "Phobjikha Valley · Gangtey Goenpa · Nature Trail"],
+];
+
 export default async function HomePage() {
   const packages = await getPublicPackages();
-
   return (
     <>
-      <section className="hero-neon">
-        <div className="hero-photo" />
-        <div className="hero-vignette" />
-        <div className="hero-grid-lines" />
-
-        <div className="page-container hero-neon-grid">
-          <div className="hero-neon-copy">
-            <div className="hero-status"><i></i><span>BHUTAN SPECIALIST · THAILAND · SINCE 2013</span></div>
-            <h1>ภูฏาน<br/><span>ในจังหวะของคุณ.</span></h1>
-            <p>Private Journey ที่ออกแบบจากวันเดินทางของคุณ ดูแลครบทั้ง Bhutan Airlines, Visa + SDF, โรงแรม, ไกด์ รถ และเส้นทาง — โดยทีมเดียวตั้งแต่เริ่มจนกลับถึงไทย</p>
-            <div className="hero-actions">
-              <Link href="/packagetour-bhutan-new" className="neon-button">ดูแพ็กเกจ <span>↗</span></Link>
-              <Link href="/packagetours-bhutan-booking" className="ghost-button">ให้เราช่วยวางทริป</Link>
-            </div>
-            <div className="hero-stat-grid">
-              <div><small>PRIVATE FROM</small><strong>2</strong><span>guests</span></div>
-              <div><small>BHUTAN EXPERIENCE</small><strong>10+</strong><span>years</span></div>
-              <div><small>CORE DESTINATIONS</small><strong>4</strong><span>cities</span></div>
-              <div><small>FULL SERVICE</small><strong>1</strong><span>team</span></div>
-            </div>
+      <section className="home-hero">
+        <div className="page-container home-hero-grid">
+          <div className="home-hero-copy">
+            <span className="section-label">BHUTAN CENTER · SINCE 2013</span>
+            <h1>เที่ยวภูฏาน<br/><em>แบบที่เป็นคุณ</em></h1>
+            <p>ทริปส่วนตัวที่เริ่มจากวันเดินทางของคุณ พร้อมทีมเดียวดูแลเที่ยวบิน วีซ่า SDF โรงแรม ไกด์ รถ และรายละเอียดตลอดเส้นทาง</p>
+            <div className="hero-actions"><Link href="/packagetour-bhutan-new" className="gold-button gold-button--large">ดูแพ็กเกจ <span>↗</span></Link><Link href="/packagetours-bhutan-booking" className="text-link text-link--large">ให้เราช่วยวางทริป <span>→</span></Link></div>
+            <div className="hero-trust"><div><strong>2+</strong><span>เริ่ม Private Tour</span></div><div><strong>10+</strong><span>ปีที่ดูแลภูฏาน</span></div><div><strong>ครบ</strong><span>Flight · Visa · Land</span></div></div>
           </div>
-
-          <div className="hero-map-card">
-            <div className="hero-map-head"><div><span>INTERACTIVE ROUTE MAP</span><strong>สำรวจภูฏานผ่าน 4 เมืองหลัก</strong></div><small>27.5° N · 90.4° E</small></div>
-            <div className="hero-mini-map">
-              <svg viewBox="0 0 1000 500" role="img" aria-label="Bhutan map">
-                <defs>
-                  <filter id="glow"><feGaussianBlur stdDeviation="6" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-                </defs>
-                <path className="map-shape" d="M73 300 C91 285 100 261 112 240 C132 205 158 184 181 155 C207 122 229 86 267 64 C307 41 351 44 389 58 C419 69 430 91 464 91 C499 91 523 78 554 89 C586 101 607 117 642 117 C675 117 699 103 730 111 C760 119 790 140 821 143 C852 147 865 139 881 158 C895 174 885 194 878 211 C871 228 878 244 897 257 C917 270 936 263 948 281 C960 300 946 317 936 332 C927 346 936 362 941 377 C946 394 935 405 916 407 C886 411 864 399 837 410 C816 419 799 436 776 425 C749 413 729 415 701 423 C675 431 650 427 621 426 C590 425 568 431 540 423 C514 416 492 403 466 405 C442 407 421 425 396 431 C366 439 335 437 305 432 C281 427 264 418 241 416 C214 413 191 417 169 404 C151 393 135 384 115 381 C95 378 84 366 86 349 C88 334 74 323 63 315 C56 310 61 305 73 300 Z"/>
-                <path className="map-ridge" d="M132 348 C245 335 347 316 448 294 C550 272 645 267 743 286 C813 299 856 319 913 347"/>
-                <path className="map-ridge" d="M188 221 C293 205 377 188 479 178 C581 169 686 173 802 203"/>
-                <path className="map-route" d="M205 287 C250 282 278 270 310 268 S380 236 425 238 S486 264 542 274"/>
-              </svg>
-              <div className="mini-pin mini-pin--paro"><i></i><span>Paro</span></div>
-              <div className="mini-pin mini-pin--thimphu"><i></i><span>Thimphu</span></div>
-              <div className="mini-pin mini-pin--punakha"><i></i><span>Punakha</span></div>
-              <div className="mini-pin mini-pin--gangtey"><i></i><span>Gangtey</span></div>
-            </div>
-            <div className="hero-map-detail">
-              <div><small>SELECTED DESTINATION</small><h3><span>พาโร</span> · Paro</h3><p>ประตูสู่ภูฏาน เมืองหุบเขาที่รวม Tiger’s Nest, Paro Dzong และสนามบินนานาชาติ</p><div className="mini-tags"><span>2,280 m</span><span>5 places</span><span>1–2 nights</span></div></div>
-              <div><small>PLACES TO DISCOVER</small><ol><li><b>01</b><span>Tiger’s Nest</span></li><li><b>02</b><span>Paro Dzong</span></li><li><b>03</b><span>Kyichu Lhakhang</span></li></ol></div>
-            </div>
+          <div className="home-hero-media">
+            <img src="/images/hero-bhutan.png" alt="Bhutan dzong and Himalayan valley" />
+            <div className="hero-photo-note"><span>BHUTAN JOURNEY</span><strong>Bangkok → Paro</strong><small>Private journey · designed around you</small></div>
           </div>
         </div>
       </section>
 
-      <section className="neon-service-strip">
-        <div className="page-container neon-service-grid">
-          <div className="neon-service-lead"><span className="micro-label">ONE TEAM · EVERYTHING BHUTAN</span><strong>ทุกอย่างที่ต้องใช้<br/>ในการไปภูฏาน</strong></div>
-          <div><span>01</span><strong>Flight</strong><small>Bhutan Airlines</small></div>
-          <div><span>02</span><strong>Visa + SDF</strong><small>Documentation</small></div>
-          <div><span>03</span><strong>Hotels</strong><small>3–5 star</small></div>
-          <div><span>04</span><strong>Guide</strong><small>Private guide</small></div>
-          <div><span>05</span><strong>Transport</strong><small>Private vehicle</small></div>
-        </div>
+      <section className="confidence-strip">
+        <div className="page-container confidence-grid"><span>Private journey from 2 guests</span><span>Bhutan Airlines support</span><span>Visa & SDF arranged</span><span>Licensed tour operator</span></div>
       </section>
 
-      <section className="section section-dark">
+      <section className="section package-section">
         <div className="page-container">
-          <div className="neon-section-head"><div><span className="micro-label">CURATED JOURNEYS</span><h2>เลือกจำนวนวัน.<br/><span>แล้วดูเส้นทางทันที.</span></h2></div><p>แต่ละแพ็กเกจบอกชัดว่าผ่านเมืองไหน ราคาเริ่มต้นเท่าไร และกดเข้าไปดูสถานที่เที่ยวในแต่ละเมืองได้โดยไม่ต้องไล่อ่านโปรแกรมยาว ๆ</p></div>
-          <PackageDashboard packages={packages} />
+          <div className="section-heading"><div><span className="section-label">OUR JOURNEYS</span><h2>เลือกจำนวนวันที่พอดี<br/>แล้วค่อยปรับให้เป็นของคุณ</h2></div><div><p>เริ่มจากโปรแกรมยอดนิยม 4, 5 หรือ 6 วัน แล้วปรับวันเดินทาง โรงแรม กิจกรรม และรูปแบบการเที่ยวได้ตามความเหมาะสม</p><Link href="/packagetour-bhutan-new" className="text-link">ดูแพ็กเกจทั้งหมด <span>→</span></Link></div></div>
+          <div className="package-grid">{packages.slice(0,3).map((item,index)=><PackageCard item={item} featured={index===1} key={item.slug}/>)}</div>
         </div>
       </section>
 
-      <section className="section section-map-neon">
+      <section className="section philosophy-section">
+        <div className="page-container philosophy-grid">
+          <div className="philosophy-media"><img src="https://upload.wikimedia.org/wikipedia/commons/0/0c/Paro_Taktsang%2C_Taktsang_Palphug_Monastery%2C_Tiger%27s_Nest_-views_from_the_trekking_path-_during_LGFC_-_Bhutan_2019_%28210%29.jpg" alt="Tiger's Nest Bhutan"/><div className="media-caption"><span>PARO</span><strong>Tiger’s Nest</strong></div></div>
+          <div className="philosophy-copy"><span className="section-label">WHY BHUTAN CENTER</span><h2>เรื่องยากให้เรา<br/>เรื่องเที่ยวให้เป็นของคุณ</h2><p>เราไม่ได้เริ่มจากการขายโปรแกรม แต่เริ่มจากดูว่าใครเดินทาง วันไหน มีเวลากี่วัน และอยากได้ทริปแบบไหน แล้วค่อยจัดเที่ยวบิน เอกสาร ที่พัก และเส้นทางให้ลงตัว</p><div className="reason-row"><span>01</span><div><strong>Private & Flexible</strong><p>เลือกวันเองและปรับจังหวะของโปรแกรมให้เหมาะกับคนในทริป</p></div></div><div className="reason-row"><span>02</span><div><strong>One team, one journey</strong><p>ตั๋ว วีซ่า SDF โรงแรม ไกด์ รถ และเอกสาร อยู่ในทีมเดียวกัน</p></div></div><div className="reason-row"><span>03</span><div><strong>Bhutan specialist</strong><p>ประสบการณ์เส้นทางภูฏานช่วยให้คำแนะนำได้ตรงกับการเดินทางจริง</p></div></div><Link href="/bhutan" className="text-link text-link--large">รู้จัก Bhutan Center <span>→</span></Link></div>
+        </div>
+      </section>
+
+      <section className="section services-section">
         <div className="page-container">
-          <BhutanCityExplorer title="4 เมืองหลัก · คนละอารมณ์" />
+          <div className="center-heading"><span className="section-label">EVERYTHING IN ONE PLACE</span><h2>ดูแลครบก่อนออกเดินทาง</h2><p>ข้อมูลที่ลูกค้าต้องใช้ถูกจัดให้อยู่ในที่เดียว ไม่ต้องตามหลายช่องทาง</p></div>
+          <div className="service-grid">{services.map(([no,title,body])=><article key={no}><span>{no}</span><h3>{title}</h3><p>{body}</p></article>)}</div>
         </div>
       </section>
 
-      <section className="section section-dark">
+      <section className="section airline-feature-section">
+        <div className="page-container airline-feature">
+          <div className="airline-feature-copy"><span className="section-label">BHUTAN AIRLINES</span><h2>Bangkok <em>↔</em> Paro</h2><p>เช็กเที่ยวบินไปพร้อมกับการวางแพ็กเกจ เพื่อให้วันบิน โรงแรม และโปรแกรมเดินทางสอดคล้องกันตั้งแต่ต้น</p><div className="route-line"><div><small>BANGKOK</small><strong>BKK</strong></div><span>✈</span><div><small>PARO</small><strong>PBH</strong></div></div><Link href="/bhutan-airlines" className="gold-button">ดูข้อมูลเที่ยวบิน <span>↗</span></Link></div>
+          <div className="airline-feature-media"><img src="/images/hero-bhutan.png" alt="Bhutan landscape"/></div>
+        </div>
+      </section>
+
+      <section className="section destination-section-home">
         <div className="page-container">
-          <div className="neon-section-head"><div><span className="micro-label">WHY BHUTAN CENTER</span><h2>เรื่องยากอยู่หลังบ้าน.<br/><span>หน้าเว็บเหลือแค่สิ่งที่ต้องรู้.</span></h2></div><p>เที่ยวบิน วีซ่า SDF โรงแรม รถ ไกด์ และราคาแพ็กเกจเชื่อมเป็น flow เดียว ลดการตามข้อมูลหลายช่องทาง</p></div>
-          <div className="neon-feature-grid">
-            <article style={{["--feature-glow" as string]:"#4ee0d8"}}><span>01</span><div className="feature-icon">✈</div><h3>Bhutan Airlines</h3><p>เที่ยวบิน · ตารางบิน · ที่นั่ง · ขอราคา</p></article>
-            <article style={{["--feature-glow" as string]:"#62dd9f"}}><span>02</span><div className="feature-icon">✓</div><h3>Visa + SDF</h3><p>เอกสารและค่าธรรมเนียมจัดการใน flow เดียว</p></article>
-            <article style={{["--feature-glow" as string]:"#ffc85c"}}><span>03</span><div className="feature-icon">▦</div><h3>Hotels</h3><p>เลือกระดับ 3–5 ดาวและอัปเกรดได้</p></article>
-            <article style={{["--feature-glow" as string]:"#ff72a5"}}><span>04</span><div className="feature-icon">⌁</div><h3>Private Journey</h3><p>เลือกวันเอง ปรับเมือง กิจกรรม และจังหวะทริป</p></article>
-          </div>
+          <div className="section-heading"><div><span className="section-label">DISCOVER BHUTAN</span><h2>4 เมืองหลัก<br/>ที่ทำให้ภูฏานแตกต่าง</h2></div><div><p>ยังไม่ต้องใช้แผนที่ในเวอร์ชันนี้ เราจัดเมืองให้เป็นข้อมูลสั้น ๆ ที่อ่านง่ายก่อน และสามารถเพิ่ม Interactive Map ภายหลังได้โดยไม่ต้องรื้อโครงเว็บใหม่</p><Link href="/bhutan-attractions" className="text-link">สำรวจสถานที่ท่องเที่ยว <span>→</span></Link></div></div>
+          <div className="city-list">{cities.map(([en,th,places],index)=><Link href="/bhutan-attractions" className="city-row" key={en}><span className="city-index">0{index+1}</span><div><strong>{th}</strong><small>{en}</small></div><p>{places}</p><span className="city-arrow">↗</span></Link>)}</div>
         </div>
       </section>
 
-      <section className="section section-dark">
-        <div className="page-container airline-neon-card">
-          <div className="airline-neon-photo"><img src="/images/hero-bhutan.png" alt="Bhutan landscape and dzong"/></div>
-          <div className="airline-neon-copy"><span className="micro-label micro-label--gold">BHUTAN AIRLINES</span><h2>บินจากกรุงเทพฯ<br/>สู่พาโร.</h2><p>ดูแลการจองเที่ยวบิน Bhutan Airlines พร้อมเชื่อมเข้ากับแพ็กเกจและวันเดินทางของคุณใน flow เดียว</p><div className="airport-route"><div><small>BANGKOK</small><strong>BKK</strong></div><i>✈</i><div><small>PARO</small><strong>PBH</strong></div></div><Link href="/bhutan-airlines" className="gold-button">ดูข้อมูลเที่ยวบิน <span>↗</span></Link></div>
-        </div>
-      </section>
-
-      <section className="section section-cta-neon">
-        <div className="page-container planner-neon">
-          <div className="planner-neon-copy"><span className="micro-label">PLAN YOUR JOURNEY</span><h2>ส่งวันเดินทางมา.<br/>ที่เหลือให้เราจัดการ.</h2><p>กรอกข้อมูลสั้น ๆ ทีมจะช่วยเลือกแพ็กเกจ เมือง โรงแรม และคำนวณราคาตามวันเดินทางจริง</p><div className="mini-tags"><span>Private 2+</span><span>3–5 Star</span><span>Economy / Business</span><span>Quotation</span></div></div>
+      <section className="section planner-section">
+        <div className="page-container planner-card">
+          <div className="planner-copy"><span className="section-label section-label--light">PLAN YOUR JOURNEY</span><h2>มีวันเดินทางแล้ว?<br/>ส่งมาให้เราดูได้เลย</h2><p>กรอกข้อมูลสั้น ๆ ทีมจะช่วยเลือกจำนวนวัน โปรแกรม และราคาให้เหมาะกับทริปจริง</p><div className="planner-points"><span>Private 2+</span><span>Hotel 3–5 Star</span><span>Economy / Business</span></div></div>
           <BookingForm compact />
         </div>
       </section>

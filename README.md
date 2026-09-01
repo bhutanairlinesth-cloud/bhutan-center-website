@@ -1,4 +1,4 @@
-# Bhutan Center V4 — Interactive Map Dashboard
+# Bhutan Center V8 — Soft Premium
 
 Modern Next.js redesign for Bhutan Center, prepared for GitHub + Vercel and designed to connect to the existing Bhutan Pricing backend.
 
@@ -93,3 +93,23 @@ Home and package-detail pages let visitors click destinations to see attractions
 ## V5 visual redesign
 
 The public website was rebuilt around the dark cinematic / neon-glass visual language of the approved digital annual report reference: deep navy, real Bhutan photography, luminous cyan/green/gold accents, interactive map panels, and information-rich dashboard sections. SEO Center, legacy Wix URLs, redirects, sitemap/robots, package data integration, and admin functionality are retained.
+
+
+## V6 design direction
+Soft contemporary travel design: ivory, sage, blush and warm neutral palette; Anuphan + Manrope typography; rounded editorial layouts; interactive four-city Bhutan map; responsive package explorer; SEO/admin/pricing integration architecture preserved.
+
+
+## V7 art direction
+
+Soft luxury / Champagne Gold redesign with warm ivory surfaces, gold accents, Noto Serif Thai headings and IBM Plex Sans Thai body text. SEO Center and all migration safeguards are preserved.
+
+
+## V8 design direction
+
+- Champagne gold / warm ivory visual system
+- Prompt loopless Thai sans-serif typography
+- Larger readable type throughout the public site
+- No interactive map in this version
+- Simple content structure designed for easy management
+- Home flow: Hero → Trust → Packages → Why us → Services → Bhutan Airlines → Destinations → Planner
+- SEO Center, Wix SEO baseline, legacy URLs, redirects, sitemap, robots, and Bhutan Pricing integration hooks are preserved.
