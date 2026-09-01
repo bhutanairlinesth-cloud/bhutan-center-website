@@ -70,3 +70,10 @@ Read:
 - `docs/SOURCES.md`
 
 The migration strategy is to preserve existing URLs where possible, not to rename everything just because the new website has a cleaner route structure.
+
+
+## GitHub Web Upload
+
+This build is specifically compatible with GitHub's browser uploader.
+It intentionally contains no folders named `[slug]` or `[...legacy]`.
+Public package URLs still remain `/packages/<slug>` through Next.js rewrites.
