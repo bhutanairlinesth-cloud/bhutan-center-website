@@ -162,3 +162,47 @@
   .inner-hero__pills span{font-size:12px;padding:7px 10px}
   .inner-hero--packages .page-container{width:min(var(--max),calc(100% - 28px))}
 }
+
+/* ===== V8.5 Premium motion layer ===== */
+.site-progress{position:fixed;z-index:160;top:0;left:0;right:0;height:3px;pointer-events:none;background:transparent}.site-progress__bar{width:100%;height:100%;transform:scaleX(0);transform-origin:left center;background:linear-gradient(90deg,#e5cfaa,#b58a49,#d7b779);box-shadow:0 0 12px rgba(181,138,73,.28);will-change:transform}
+.site-header,.nav-shell{transition:padding .35s ease,background-color .35s ease,border-color .35s ease,box-shadow .35s ease,transform .35s ease}.site-header.is-scrolled .nav-shell{background:rgba(255,253,249,.97);border-color:rgba(220,205,183,.78);box-shadow:0 14px 38px rgba(70,53,33,.12)}
+
+/* First-view entrance: restrained and quick. */
+.motion-enabled .home-hero-copy>.section-label{animation:heroFadeUp .65s .05s both cubic-bezier(.22,.8,.25,1)}
+.motion-enabled .home-hero-copy>h1{animation:heroFadeUp .78s .12s both cubic-bezier(.22,.8,.25,1)}
+.motion-enabled .home-hero-copy>p{animation:heroFadeUp .78s .20s both cubic-bezier(.22,.8,.25,1)}
+.motion-enabled .home-hero-copy>.hero-actions{animation:heroFadeUp .78s .28s both cubic-bezier(.22,.8,.25,1)}
+.motion-enabled .home-hero-copy>.hero-trust{animation:heroFadeUp .78s .36s both cubic-bezier(.22,.8,.25,1)}
+.motion-enabled .home-hero-media{animation:heroMediaIn .9s .14s both cubic-bezier(.18,.78,.22,1)}
+.motion-enabled .inner-hero .section-label,.motion-enabled .inner-hero h1,.motion-enabled .inner-hero p{animation:heroFadeUp .72s both cubic-bezier(.22,.8,.25,1)}
+.motion-enabled .inner-hero h1{animation-delay:.08s}.motion-enabled .inner-hero p{animation-delay:.16s}
+@keyframes heroFadeUp{from{opacity:0;transform:translate3d(0,22px,0)}to{opacity:1;transform:translate3d(0,0,0)}}
+@keyframes heroMediaIn{from{opacity:0;transform:translate3d(22px,0,0) scale(.985)}to{opacity:1;transform:translate3d(0,0,0) scale(1)}}
+
+/* Scroll reveal */
+.motion-enabled .motion-reveal{opacity:0;transform:translate3d(0,28px,0);transition:opacity .72s cubic-bezier(.22,.8,.25,1),transform .72s cubic-bezier(.22,.8,.25,1);transition-delay:var(--reveal-delay,0ms);will-change:opacity,transform}.motion-enabled .motion-reveal.is-visible{opacity:1;transform:translate3d(0,0,0)}
+
+/* Slow image depth / parallax. */
+.home-hero-media img,.philosophy-media img,.airline-feature-media img,.package-hero-media img,.destination-editorial-media img{transform:scale(1.035) translate3d(0,var(--parallax-y,0px),0);transition:transform .18s linear;will-change:transform}
+.home-hero-media:hover img,.philosophy-media:hover img,.airline-feature-media:hover img,.destination-editorial-media:hover img{transform:scale(1.065) translate3d(0,var(--parallax-y,0px),0)}
+.hero-photo-note{animation:softFloat 5.5s ease-in-out infinite}@keyframes softFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+
+/* Soft cursor light for interactive cards. */
+.motion-shine{position:relative;isolation:isolate}.motion-shine::before{content:"";position:absolute;z-index:0;inset:0;border-radius:inherit;pointer-events:none;opacity:0;background:radial-gradient(260px circle at var(--shine-x,50%) var(--shine-y,50%),rgba(216,187,134,.22),transparent 64%);transition:opacity .28s ease}.motion-shine:hover::before{opacity:1}.motion-shine>*{position:relative;z-index:1}
+
+/* More tactile cards, rows and links. */
+.package-card{will-change:transform}.package-card:hover{transform:translateY(-8px)}.package-card__arrow{transition:transform .28s cubic-bezier(.22,.8,.25,1),background .28s ease}.package-card:hover .package-card__arrow{transform:translateX(4px)}
+.service-grid article{transition:transform .28s ease,border-color .28s ease,box-shadow .28s ease}.service-grid article:hover{transform:translateY(-5px);border-color:#dcc6a3;box-shadow:0 16px 34px rgba(70,53,33,.08)}
+.city-row{transition:transform .28s ease,background-color .28s ease,border-color .28s ease}.city-row:hover{transform:translateX(7px);background:#fffaf1;border-color:#dfc9a7}.city-row .city-arrow{transition:transform .28s ease}.city-row:hover .city-arrow{transform:translate(3px,-3px)}
+.reason-row{transition:transform .25s ease}.reason-row:hover{transform:translateX(5px)}
+
+/* Gold buttons get a short light sweep instead of a loud animation. */
+.gold-button{position:relative;overflow:hidden;isolation:isolate}.gold-button::before{content:"";position:absolute;z-index:-1;top:-30%;bottom:-30%;left:-45%;width:28%;transform:skewX(-20deg);background:linear-gradient(90deg,transparent,rgba(255,255,255,.38),transparent);transition:left .58s cubic-bezier(.22,.8,.25,1)}.gold-button:hover::before{left:120%}.gold-button span{transition:transform .24s ease}.gold-button:hover span{transform:translate(2px,-2px)}
+.text-link{position:relative}.text-link::after{content:"";position:absolute;left:0;right:100%;bottom:-3px;height:1px;background:var(--gold-dark);transition:right .3s ease}.text-link:hover::after{right:0}
+
+/* Form focus is animated but calm. */
+.booking-form input,.booking-form select,.booking-form textarea{transition:border-color .22s ease,box-shadow .22s ease,background-color .22s ease,transform .22s ease}.booking-form input:focus,.booking-form select:focus,.booking-form textarea:focus{transform:translateY(-1px);border-color:#c9a365;box-shadow:0 0 0 4px rgba(181,138,73,.10)}
+
+/* Respect accessibility preferences and keep small screens fast. */
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.site-progress{display:none}.motion-enabled .motion-reveal,.motion-enabled .motion-reveal.is-visible,.motion-enabled .home-hero-copy>*,.motion-enabled .home-hero-media,.motion-enabled .inner-hero *{animation:none!important;opacity:1!important;transform:none!important;transition:none!important}.home-hero-media img,.philosophy-media img,.airline-feature-media img,.package-hero-media img,.destination-editorial-media img,.hero-photo-note{animation:none!important;transform:none!important;transition:none!important}}
+@media(max-width:900px){.site-progress{height:2px}.home-hero-media img,.philosophy-media img,.airline-feature-media img,.package-hero-media img,.destination-editorial-media img{transform:none}.hero-photo-note{animation:none}.motion-enabled .motion-reveal{transform:translate3d(0,18px,0)}}

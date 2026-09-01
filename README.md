@@ -128,3 +128,14 @@ Soft luxury / Champagne Gold redesign with warm ivory surfaces, gold accents, No
 - Redesigned Packages hero hierarchy.
 - Added responsive desktop/tablet/mobile rules.
 - Added missing base public utility classes detected by QA.
+
+
+## V8.5 Premium Motion
+- Soft scroll reveal for sections and cards
+- Gentle parallax on large travel photography
+- Gold scroll progress indicator
+- Header depth transition on scroll
+- Hover depth / cursor glow on interactive cards
+- Button light sweep and link underline micro-interactions
+- Animated form focus states
+- Respects prefers-reduced-motion
