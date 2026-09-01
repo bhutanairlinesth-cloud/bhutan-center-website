@@ -29,7 +29,7 @@ export default function MotionEffects() {
       if (!prefersReduced && window.innerWidth > 900) {
         document
           .querySelectorAll<HTMLElement>(
-            ".home-hero-media, .philosophy-media, .airline-feature-media, .package-hero-media, .destination-editorial-media"
+            ".hero-main-photo, .philosophy-media, .airline-feature-media, .package-hero-media, .destination-editorial-media"
           )
           .forEach((box) => {
             const rect = box.getBoundingClientRect();

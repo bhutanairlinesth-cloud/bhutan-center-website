@@ -35,11 +35,22 @@ export default async function HomePage() {
             <h1>เที่ยวภูฏาน<br/><em>แบบที่เป็นคุณ</em></h1>
             <p>ทริปส่วนตัวที่เริ่มจากวันเดินทางของคุณ พร้อมทีมเดียวดูแลเที่ยวบิน วีซ่า SDF โรงแรม ไกด์ รถ และรายละเอียดตลอดเส้นทาง</p>
             <div className="hero-actions"><Link href="/packagetour-bhutan-new" className="gold-button gold-button--large">ดูแพ็กเกจ <span>↗</span></Link><Link href="/packagetours-bhutan-booking" className="text-link text-link--large">ให้เราช่วยวางทริป <span>→</span></Link></div>
+            <div className="hero-benefits"><span>เลือกวันเอง</span><span>Private 2+</span><span>Visa + SDF</span><span>Hotel 3–5★</span></div>
             <div className="hero-trust"><div><strong>2+</strong><span>เริ่ม Private Tour</span></div><div><strong>10+</strong><span>ปีที่ดูแลภูฏาน</span></div><div><strong>ครบ</strong><span>Flight · Visa · Land</span></div></div>
           </div>
-          <div className="home-hero-media">
-            <img src="/images/hero-bhutan.png" alt="Bhutan dzong and Himalayan valley" />
-            <div className="hero-photo-note"><span>BHUTAN JOURNEY</span><strong>Bangkok → Paro</strong><small>Private journey · designed around you</small></div>
+          <div className="home-hero-visual">
+            <div className="hero-main-photo">
+              <img src="/images/hero-bhutan.png" alt="Bhutan dzong and Himalayan valley" />
+              <div className="hero-route-pill"><span>BKK</span><i></i><span>PBH</span><small>Bhutan Airlines</small></div>
+              <div className="hero-place-nav" aria-label="Bhutan destinations">
+                <span className="active">Paro</span><span>Thimphu</span><span>Punakha</span><span>Gangtey</span>
+              </div>
+            </div>
+            <div className="hero-inset-photo">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/0/0c/Paro_Taktsang%2C_Taktsang_Palphug_Monastery%2C_Tiger%27s_Nest_-views_from_the_trekking_path-_during_LGFC_-_Bhutan_2019_%28210%29.jpg" alt="Tiger's Nest in Paro, Bhutan"/>
+              <div><span>PARO</span><strong>Tiger’s Nest</strong></div>
+            </div>
+            <div className="hero-gold-orbit" aria-hidden="true"></div>
           </div>
         </div>
       </section>

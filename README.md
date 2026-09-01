@@ -146,3 +146,11 @@ Soft luxury / Champagne Gold redesign with warm ivory surfaces, gold accents, No
 - Motion no longer hides entire sections; only contained elements reveal.
 - Added missing city-list and compact submit layout.
 - Added responsive desktop/tablet/mobile rules for all restored Home sections.
+
+
+## V8.7 Hero polish
+- Removed the white Bangkok → Paro decorative card
+- Added layered travel photography composition
+- Added subtle route pill and destination chips
+- Added soft gold ambient details
+- Preserved all SEO/admin/pricing integration

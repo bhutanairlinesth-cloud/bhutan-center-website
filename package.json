@@ -1,6 +1,6 @@
 {
   "name": "bhutan-center-v8-soft-premium",
-  "version": "0.8.6-full-layout-audit",
+  "version": "0.8.7-hero-polish",
   "private": true,
   "scripts": {
     "dev": "next dev",
