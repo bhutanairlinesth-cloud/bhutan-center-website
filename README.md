@@ -89,3 +89,7 @@ Core destinations:
 - Gangtey
 
 Home and package-detail pages let visitors click destinations to see attractions. Package detail pages only enable destinations included in that package. SEO Center, Wix legacy URL preservation, Supabase hooks, sitemap, robots, and the Pricing integration architecture remain in place.
+
+## V5 visual redesign
+
+The public website was rebuilt around the dark cinematic / neon-glass visual language of the approved digital annual report reference: deep navy, real Bhutan photography, luminous cyan/green/gold accents, interactive map panels, and information-rich dashboard sections. SEO Center, legacy Wix URLs, redirects, sitemap/robots, package data integration, and admin functionality are retained.
