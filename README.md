@@ -113,3 +113,10 @@ Soft luxury / Champagne Gold redesign with warm ivory surfaces, gold accents, No
 - Simple content structure designed for easy management
 - Home flow: Hero → Trust → Packages → Why us → Services → Bhutan Airlines → Destinations → Planner
 - SEO Center, Wix SEO baseline, legacy URLs, redirects, sitemap, robots, and Bhutan Pricing integration hooks are preserved.
+
+
+## V8.1 update
+- Package cards redesigned for clearer hierarchy
+- Entire card is now clickable
+- Arrow button is no longer the only click target
+- Cleaner footer with clearer CTA
