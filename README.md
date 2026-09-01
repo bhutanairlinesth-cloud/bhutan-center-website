@@ -1,0 +1,72 @@
+# Bhutan Center V2
+
+Modern Next.js redesign for Bhutan Center, prepared for GitHub + Vercel and designed to connect to the existing Bhutan Pricing backend.
+
+## What is included
+
+- Modern responsive public website
+- Dynamic tour package data layer (`BHUTAN_PRICING_API_URL`)
+- Package inquiry / lead endpoint
+- SEO-safe legacy URL rewrites for verified high-value Wix URLs
+- Search metadata + canonical URLs + Open Graph
+- `sitemap.xml` and `robots.txt`
+- TravelAgency / Organization structured data
+- **SEO & GEO Center** at `/admin/seo`
+- Wix SEO Setup Checklist baseline imported: **166/174**, 44 pages, 8 visible pending tasks
+- Redirect Manager for 301 / 308 migration rules
+- Optional Supabase persistence for SEO admin state
+
+## Run locally
+
+```bash
+npm install
+npm run dev
+```
+
+Open:
+
+- Website: `http://localhost:3000`
+- SEO Center: `http://localhost:3000/admin/seo`
+
+## Environment
+
+Copy `.env.example` to `.env.local`.
+
+### Bhutan Pricing
+
+```env
+BHUTAN_PRICING_API_URL=
+BHUTAN_PRICING_API_KEY=
+```
+
+Expected endpoint:
+
+`GET {BHUTAN_PRICING_API_URL}/public/packages`
+
+Only public package fields should be returned. Do not expose internal cost, margin, agent price, invoice or operational notes.
+
+### SEO Center persistence
+
+```env
+SUPABASE_URL=
+SUPABASE_SERVICE_ROLE_KEY=
+BHUTAN_ADMIN_TOKEN=
+```
+
+Run the SQL migration:
+
+`supabase/migrations/20260901_seo_center.sql`
+
+Without Supabase configuration, the SEO Center still works as a browser draft using `localStorage`.
+
+## Important before replacing Wix
+
+The existing Bhutan Center website already has Google history and ranking. Do **not** point the production domain to this project until the migration audit is complete.
+
+Read:
+
+- `docs/SEO_MIGRATION.md`
+- `docs/INTEGRATION.md`
+- `docs/SOURCES.md`
+
+The migration strategy is to preserve existing URLs where possible, not to rename everything just because the new website has a cleaner route structure.
