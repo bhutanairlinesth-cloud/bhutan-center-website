@@ -1,6 +1,6 @@
 {
   "name": "bhutan-center-v8-soft-premium",
-  "version": "0.8.5-motion-premium",
+  "version": "0.8.6-full-layout-audit",
   "private": true,
   "scripts": {
     "dev": "next dev",

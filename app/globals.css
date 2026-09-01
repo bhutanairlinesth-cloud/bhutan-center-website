@@ -206,3 +206,189 @@
 /* Respect accessibility preferences and keep small screens fast. */
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.site-progress{display:none}.motion-enabled .motion-reveal,.motion-enabled .motion-reveal.is-visible,.motion-enabled .home-hero-copy>*,.motion-enabled .home-hero-media,.motion-enabled .inner-hero *{animation:none!important;opacity:1!important;transform:none!important;transition:none!important}.home-hero-media img,.philosophy-media img,.airline-feature-media img,.package-hero-media img,.destination-editorial-media img,.hero-photo-note{animation:none!important;transform:none!important;transition:none!important}}
 @media(max-width:900px){.site-progress{height:2px}.home-hero-media img,.philosophy-media img,.airline-feature-media img,.package-hero-media img,.destination-editorial-media img{transform:none}.hero-photo-note{animation:none}.motion-enabled .motion-reveal{transform:translate3d(0,18px,0)}}
+
+
+/* ===== V8.6 FULL PUBLIC LAYOUT AUDIT ===== */
+/* This layer restores every desktop layout used by the V8 public home flow.
+   It intentionally lives last so older partial/mobile-only fragments cannot collapse the page. */
+
+/* Shared rhythm */
+.section{padding:104px 0}
+.philosophy-section,.services-section,.airline-feature-section,.destination-section-home,.planner-section{position:relative}
+
+/* WHY BHUTAN CENTER */
+.philosophy-section{background:#fffdf9}
+.philosophy-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.05fr) minmax(420px,.95fr);
+  gap:72px;
+  align-items:center;
+}
+.philosophy-media{
+  position:relative;
+  min-height:650px;
+  border-radius:32px;
+  overflow:hidden;
+  background:#e9dfd0;
+  box-shadow:var(--shadow-soft);
+}
+.philosophy-media img{width:100%;height:100%;object-fit:cover}
+.philosophy-media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 58%,rgba(42,34,26,.42))}
+.media-caption{
+  position:absolute;z-index:2;left:24px;bottom:22px;
+  padding:14px 17px;border-radius:16px;
+  background:rgba(255,253,249,.90);backdrop-filter:blur(12px);
+  color:var(--ink);font-size:12px;
+}
+.media-caption span{display:block;color:var(--gold-dark);font-size:11px;letter-spacing:.08em}
+.media-caption strong{display:block;margin-top:3px;font-size:17px;font-weight:500}
+.philosophy-copy{max-width:610px;padding:20px 0}
+.philosophy-copy h2{margin:0;color:var(--ink);font-size:clamp(44px,4.8vw,66px);font-weight:400;line-height:1.1;letter-spacing:-.04em}
+.philosophy-copy>p{margin:24px 0 30px;color:var(--muted);font-size:17px;line-height:1.9;font-weight:300}
+.reason-row{
+  display:grid;grid-template-columns:44px 1fr;gap:16px;
+  padding:18px 0;border-top:1px solid var(--line);
+}
+.reason-row>span{padding-top:2px;color:var(--gold-dark);font-size:13px;font-weight:500}
+.reason-row strong{display:block;color:var(--ink);font-size:16px;font-weight:500}
+.reason-row p{margin:5px 0 0;color:var(--muted);font-size:14px;line-height:1.7;font-weight:300}
+.philosophy-copy>.text-link{margin-top:24px}
+
+/* EVERYTHING IN ONE PLACE */
+.services-section{background:#f5ede1}
+.service-grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:16px;
+}
+.service-grid article{
+  min-height:270px;
+  padding:28px;
+  display:flex;flex-direction:column;
+  border:1px solid #e3d7c7;
+  border-radius:24px;
+  background:rgba(255,253,249,.82);
+}
+.service-grid article>span{color:var(--gold-dark);font-size:13px;font-weight:500}
+.service-grid article h3{margin:auto 0 12px;color:var(--ink);font-size:23px;line-height:1.35;font-weight:500}
+.service-grid article p{margin:0;color:var(--muted);font-size:14px;line-height:1.75;font-weight:300}
+
+/* BHUTAN AIRLINES */
+.airline-feature-section{background:#fffdf9}
+.airline-feature{
+  display:grid;
+  grid-template-columns:minmax(420px,.86fr) minmax(0,1.14fr);
+  min-height:590px;
+  overflow:hidden;
+  border:1px solid var(--line);
+  border-radius:32px;
+  background:#fff;
+  box-shadow:var(--shadow-soft);
+}
+.airline-feature-copy{
+  padding:54px;
+  display:flex;flex-direction:column;justify-content:center;
+}
+.airline-feature-copy h2{margin:0;color:var(--ink);font-size:clamp(44px,4.7vw,64px);line-height:1.08;font-weight:400;letter-spacing:-.04em}
+.airline-feature-copy h2 em{font-style:normal;color:var(--gold-dark)}
+.airline-feature-copy>p{margin:22px 0;color:var(--muted);font-size:16px;line-height:1.85;font-weight:300}
+.route-line{
+  margin:8px 0 30px;
+  display:grid;grid-template-columns:1fr 48px 1fr;align-items:center;gap:10px;
+  padding:18px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+}
+.route-line>div:last-child{text-align:right}
+.route-line small{display:block;color:#8d8074;font-size:11px;letter-spacing:.08em}
+.route-line strong{display:block;margin-top:2px;color:var(--ink);font-size:27px;font-weight:500}
+.route-line>span{display:grid;place-items:center;color:var(--gold-dark);font-size:20px}
+.airline-feature-copy>.gold-button{align-self:flex-start}
+.airline-feature-media{position:relative;min-height:590px;overflow:hidden;background:#e8dfd3}
+.airline-feature-media::after{content:"";position:absolute;inset:0;box-shadow:inset 1px 0 0 rgba(255,255,255,.2)}
+.airline-feature-media img{width:100%;height:100%;object-fit:cover}
+
+/* DESTINATIONS - deliberately simple until map returns */
+.destination-section-home{background:#faf6ef}
+.city-list{border-top:1px solid var(--line)}
+.city-row{
+  display:grid;
+  grid-template-columns:64px minmax(150px,190px) minmax(0,1fr) 48px;
+  gap:22px;
+  align-items:center;
+  min-height:112px;
+  padding:18px 14px;
+  border-bottom:1px solid var(--line);
+  border-radius:16px;
+}
+.city-index{color:var(--gold-dark);font-size:13px;font-weight:500}
+.city-row strong{display:block;color:var(--ink);font-size:20px;font-weight:500}
+.city-row small{display:block;margin-top:2px;color:#928578;font-size:12px}
+.city-row p{margin:0;color:var(--muted);font-size:14px;line-height:1.7;font-weight:300}
+.city-arrow{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:#f0e3cf;color:var(--gold-dark);font-size:16px}
+
+/* HOME PLANNER */
+.planner-section{background:#f3eadc}
+.planner-card{
+  display:grid;
+  grid-template-columns:minmax(380px,.82fr) minmax(0,1.18fr);
+  overflow:hidden;
+  border-radius:32px;
+  background:#3a3129;
+  box-shadow:var(--shadow);
+}
+.planner-copy{padding:54px;color:#fff;display:flex;flex-direction:column;justify-content:center}
+.planner-copy h2{margin:0;color:#fff;font-size:clamp(42px,4.5vw,60px);line-height:1.1;font-weight:400;letter-spacing:-.035em}
+.planner-copy>p{margin:22px 0;color:rgba(255,255,255,.66);font-size:16px;line-height:1.8;font-weight:300}
+.planner-points{display:flex;flex-wrap:wrap;gap:9px;margin-top:6px}
+.planner-points span{padding:9px 12px;border:1px solid rgba(255,255,255,.16);border-radius:999px;color:rgba(255,255,255,.78);font-size:12px}
+.planner-card>.booking-form{align-self:stretch}
+.planner-card .booking-form--compact{padding:42px;background:#fffdf9}
+.form-submit--compact{grid-column:1/-1}
+
+/* Generic public page polish / missing helpers */
+.inner-hero__title{min-width:0}
+.section--white{background:#fffdf9}
+
+/* Keep motion decorative, never structural. */
+.motion-enabled .motion-reveal{will-change:opacity,transform}
+
+@media(max-width:1180px){
+  .philosophy-grid{grid-template-columns:1fr 1fr;gap:46px}
+  .philosophy-media{min-height:560px}
+  .service-grid{grid-template-columns:1fr 1fr}
+  .airline-feature{grid-template-columns:.92fr 1.08fr}
+  .airline-feature-copy{padding:42px}
+  .city-row{grid-template-columns:54px 160px 1fr 44px;gap:16px}
+  .planner-card{grid-template-columns:.9fr 1.1fr}
+}
+
+@media(max-width:960px){
+  .section{padding:88px 0}
+  .philosophy-grid,.airline-feature,.planner-card{grid-template-columns:1fr}
+  .philosophy-media{min-height:520px}
+  .philosophy-copy{max-width:none;padding-top:8px}
+  .airline-feature-copy{padding:42px 34px}
+  .airline-feature-media{min-height:480px}
+  .city-row{grid-template-columns:50px 150px 1fr 42px}
+  .planner-copy{padding:42px 34px}
+}
+
+@media(max-width:650px){
+  .section{padding:76px 0}
+  .philosophy-media{min-height:400px;border-radius:24px}
+  .philosophy-copy h2{font-size:42px}
+  .philosophy-copy>p{font-size:15px}
+  .service-grid{grid-template-columns:1fr}
+  .service-grid article{min-height:210px;padding:24px}
+  .airline-feature{border-radius:24px}
+  .airline-feature-copy{padding:32px 22px}
+  .airline-feature-copy h2{font-size:42px}
+  .airline-feature-media{min-height:350px}
+  .route-line strong{font-size:23px}
+  .city-row{grid-template-columns:40px 1fr 40px;gap:12px;padding:18px 4px}
+  .city-row p{grid-column:2/4;margin-top:3px}
+  .city-arrow{grid-column:3;grid-row:1;width:36px;height:36px}
+  .planner-card{border-radius:24px}
+  .planner-copy{padding:34px 22px}
+  .planner-copy h2{font-size:40px}
+  .planner-card .booking-form--compact{padding:26px 20px}
+}

@@ -53,11 +53,15 @@ export default function MotionEffects() {
     onScroll();
 
     const selectors = [
-      "main > section:not(.home-hero)",
+      ".section-heading",
+      ".center-heading",
       ".package-card",
+      ".philosophy-copy",
       ".service-grid article",
+      ".airline-feature-copy",
       ".city-row",
-      ".reason-row",
+      ".planner-copy",
+      ".booking-form-card",
       ".booking-step",
       ".highlight-grid article",
       ".trip-facts > *",
@@ -65,8 +69,9 @@ export default function MotionEffects() {
       ".info-card",
       ".hotel-card",
       ".journal-card",
-      ".include-panel",
+      ".inclusion-card",
       ".itinerary-list details",
+      ".callout",
     ].join(",");
 
     const revealItems = Array.from(document.querySelectorAll<HTMLElement>(selectors));

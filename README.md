@@ -139,3 +139,10 @@ Soft luxury / Champagne Gold redesign with warm ivory surfaces, gold accents, No
 - Button light sweep and link underline micro-interactions
 - Animated form focus states
 - Respects prefers-reduced-motion
+
+
+## V8.6 Full Layout Audit
+- Restored missing desktop layouts for Why Bhutan Center, Services, Bhutan Airlines, Destinations, and Planner sections.
+- Motion no longer hides entire sections; only contained elements reveal.
+- Added missing city-list and compact submit layout.
+- Added responsive desktop/tablet/mobile rules for all restored Home sections.
