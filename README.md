@@ -120,3 +120,11 @@ Soft luxury / Champagne Gold redesign with warm ivory surfaces, gold accents, No
 - Entire card is now clickable
 - Arrow button is no longer the only click target
 - Cleaner footer with clearer CTA
+
+
+## V8.4 Layout QA
+- Restored missing desktop inner-page hero CSS.
+- Fixed fixed-header / logo overlap on package pages.
+- Redesigned Packages hero hierarchy.
+- Added responsive desktop/tablet/mobile rules.
+- Added missing base public utility classes detected by QA.
