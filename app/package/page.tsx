@@ -6,6 +6,7 @@ import { getPublicPackage } from "@/lib/pricing-source";
 import { packagePublicPath } from "@/lib/public-paths";
 import { loadSeoState } from "@/lib/seo-store";
 import { metadataForPath } from "@/lib/seo-config";
+import BhutanCityExplorer from "@/components/BhutanCityExplorer";
 
 type SearchParams = Promise<{ slug?: string | string[] }>;
 
@@ -19,12 +20,7 @@ export async function generateMetadata(
   const params = await searchParams;
   const slug = getSlug(params.slug);
 
-  if (!slug) {
-    return {
-      title: "แพ็กเกจภูฏาน | Bhutan Center",
-      robots: { index: false, follow: false },
-    };
-  }
+  if (!slug) return { title: "แพ็กเกจภูฏาน | Bhutan Center", robots: { index: false, follow: false } };
 
   const item = await getPublicPackage(slug);
   if (!item) return { title: "แพ็กเกจภูฏาน | Bhutan Center" };
@@ -39,13 +35,12 @@ export async function generateMetadata(
     description: configured.description || item.shortDescription,
     alternates: configured.alternates || { canonical },
     robots: configured.robots || { index: true, follow: true },
-    openGraph:
-      configured.openGraph || {
-        title: `${item.name} ${item.duration} | Bhutan Center`,
-        description: item.shortDescription,
-        url: canonical,
-        images: [{ url: item.image }],
-      },
+    openGraph: configured.openGraph || {
+      title: `${item.name} ${item.duration} | Bhutan Center`,
+      description: item.shortDescription,
+      url: canonical,
+      images: [{ url: item.image }],
+    },
   };
 }
 
@@ -54,7 +49,6 @@ export default async function PackageDetailPage(
 ) {
   const params = await searchParams;
   const slug = getSlug(params.slug);
-
   if (!slug) notFound();
 
   const item = await getPublicPackage(slug);
@@ -62,136 +56,103 @@ export default async function PackageDetailPage(
 
   return (
     <>
-      <section className="package-detail-hero">
-        <div className="package-detail-copy">
-          <span className="eyebrow">{item.duration} · {item.badge}</span>
-          <h1>{item.name}</h1>
-          <p className="lead">{item.overview}</p>
-
-          <div className="package-stats">
-            <div className="package-stat">
-              <span>Route</span>
-              <strong>{item.cities.join(" · ")}</strong>
-            </div>
-            <div className="package-stat">
-              <span>Airline</span>
-              <strong>{item.airline}</strong>
-            </div>
-            <div className="package-stat">
-              <span>Style</span>
-              <strong>Private Tour</strong>
-            </div>
-          </div>
-
-          <div className="price-box">
-            <small>เริ่มต้น</small>
-            <strong>฿{formatTHB(item.priceFrom)}</strong>
-            <span>/ ท่าน</span>
-          </div>
-
-          <div>
-            <Link
-              href={`/packagetours-bhutan-booking?package=${item.slug}`}
-              className="button button--gold"
-            >
-              ขอใบเสนอราคา <span>→</span>
-            </Link>
-          </div>
+      <section className="package-hero-dashboard">
+        <div className="package-hero-media">
+          <img src={item.image} alt={item.name} />
+          <div className="package-hero-shade"></div>
+          <div className="package-photo-code"><span>BHUTAN / {item.days}D{item.nights}N</span><span>{item.cities.length} DESTINATIONS</span></div>
         </div>
 
-        <div className="package-detail-image">
-          <img src={item.image} alt={item.name} />
+        <div className="package-hero-info">
+          <div className="package-hero-breadcrumb">PACKAGES / {item.name.toUpperCase()}</div>
+          <span className="package-badge-dashboard">{item.badge}</span>
+          <h1>{item.name}</h1>
+          <p>{item.overview}</p>
+
+          <div className="package-route-dashboard">
+            {item.cities.map((city, index) => (
+              <div key={city}><span>{String(index + 1).padStart(2, "0")}</span><strong>{city}</strong></div>
+            ))}
+          </div>
+
+          <div className="package-price-dashboard">
+            <div><span>ราคาเริ่มต้น</span><strong>฿{formatTHB(item.priceFrom)}</strong><small>/ ท่าน</small></div>
+            <Link href={`/packagetours-bhutan-booking?package=${item.slug}`} className="primary-pill primary-pill--large">ขอใบเสนอราคา <span>↗</span></Link>
+          </div>
         </div>
       </section>
 
-      <section className="section">
-        <div className="container detail-layout">
-          <div>
-            <section className="detail-section">
-              <span className="eyebrow">Tour highlights</span>
-              <h2>สิ่งที่คุณจะได้สัมผัส</h2>
-              <ul className="highlight-list">
-                {item.highlights.map((x) => <li key={x}>{x}</li>)}
-              </ul>
-            </section>
-
-            <section className="detail-section">
-              <span className="eyebrow">Itinerary</span>
-              <h2>โปรแกรมการเดินทาง</h2>
-              <div className="timeline">
-                {item.itinerary.map((day) => (
-                  <div className="timeline-item" key={day.day}>
-                    <div className="timeline-day">D{day.day}</div>
-                    <div>
-                      <h3>{day.title}</h3>
-                      <p>{day.summary}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </section>
-
-            <section className="detail-section">
-              <span className="eyebrow">What’s included</span>
-              <h2>ราคารวมอะไรบ้าง</h2>
-              <div className="include-grid">
-                <div>
-                  <h3>รวมในแพ็กเกจ</h3>
-                  <ul className="check-list">
-                    {item.includes.map((x) => <li key={x}>{x}</li>)}
-                  </ul>
-                </div>
-                <div>
-                  <h3>ไม่รวม</h3>
-                  <ul className="cross-list">
-                    {item.excludes.map((x) => <li key={x}>{x}</li>)}
-                  </ul>
-                </div>
-              </div>
-            </section>
-
-            <section className="detail-section">
-              <span className="eyebrow">Good to know</span>
-              <h2>ก่อนตัดสินใจ</h2>
-              <p>
-                แพ็กเกจเป็นทัวร์ส่วนตัว สามารถเลือกวันเดินทางเองได้ ราคาอาจเปลี่ยนแปลงตามอัตราแลกเปลี่ยน
-                ราคาตั๋วเครื่องบิน จำนวนผู้เดินทาง และประกาศจากหน่วยงานที่เกี่ยวข้อง
-                รายการทัวร์อาจปรับตามความเหมาะสมโดยยึดประโยชน์และความปลอดภัยของผู้เดินทางเป็นหลัก
-              </p>
-              <p>
-                หนังสือเดินทางควรมีอายุเหลือไม่น้อยกว่า 6 เดือนนับจากวันเดินทาง
-                และควรมีหน้าว่างสำหรับการเดินทางเพียงพอ
-              </p>
-            </section>
+      <section className="section package-overview-section">
+        <div className="page-container package-overview-grid">
+          <div className="package-overview-sticky">
+            <span className="section-code">TRIP AT A GLANCE</span>
+            <h2>{item.duration}</h2>
+            <div className="overview-metrics">
+              <div><span>DAYS</span><strong>{item.days}</strong></div>
+              <div><span>NIGHTS</span><strong>{item.nights}</strong></div>
+              <div><span>CITIES</span><strong>{item.cities.length}</strong></div>
+            </div>
+            <p>{item.shortDescription}</p>
           </div>
 
-          <aside className="sticky-booking">
-            <span className="eyebrow">Plan this trip</span>
-            <h3>{item.name}</h3>
-            <p>{item.priceNote}</p>
-            <div className="price-box">
-              <strong>฿{formatTHB(item.priceFrom)}</strong>
-              <span>/ ท่าน</span>
-            </div>
-            <Link
-              href={`/packagetours-bhutan-booking?package=${item.slug}`}
-              className="button"
-            >
-              ขอราคาตามวันเดินทาง
-            </Link>
-            <a
-              href={process.env.NEXT_PUBLIC_LINE_URL || "https://lin.ee/"}
-              className="button button--outline"
-            >
-              คุยกับเราทาง LINE
-            </a>
-            <hr />
-            <small>
-              โรงแรม: {item.hotel}
-              <br />
-              เส้นทาง: {item.cities.join(" · ")}
-            </small>
-          </aside>
+          <div className="package-highlights-dashboard">
+            <span className="section-code">HIGHLIGHTS</span>
+            {item.highlights.map((highlight, index) => (
+              <article key={highlight}>
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <h3>{highlight}</h3>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section section-map section-map--package">
+        <div className="page-container">
+          <BhutanCityExplorer
+            cityNames={item.cities}
+            compact
+            title={`เมืองที่คุณจะได้ไปใน ${item.name}`}
+          />
+        </div>
+      </section>
+
+      <section className="section itinerary-dashboard-section">
+        <div className="page-container">
+          <div className="section-heading-dashboard">
+            <div><span className="section-code">DAY BY DAY</span><h2>โปรแกรมการเดินทาง.</h2></div>
+            <p>อ่านภาพรวมแต่ละวันแบบสั้นก่อน แล้วค่อยเปิดรายละเอียดเมื่อคุณต้องการ</p>
+          </div>
+
+          <div className="itinerary-dashboard">
+            {item.itinerary.map((day) => (
+              <article key={day.day}>
+                <div className="day-number">DAY {String(day.day).padStart(2, "0")}</div>
+                <h3>{day.title}</h3>
+                <p>{day.summary}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section include-dashboard-section">
+        <div className="page-container include-dashboard-grid">
+          <div className="include-panel include-panel--yes">
+            <div className="include-panel-head"><span>INCLUDED</span><strong>รวมในแพ็กเกจ</strong></div>
+            {item.includes.map((x, i) => <div className="include-row" key={x}><span>{String(i+1).padStart(2,"0")}</span><p>{x}</p><b>✓</b></div>)}
+          </div>
+          <div className="include-panel">
+            <div className="include-panel-head"><span>NOT INCLUDED</span><strong>ไม่รวม</strong></div>
+            {item.excludes.map((x, i) => <div className="include-row" key={x}><span>{String(i+1).padStart(2,"0")}</span><p>{x}</p><b>—</b></div>)}
+          </div>
+        </div>
+      </section>
+
+      <section className="section package-final-cta">
+        <div className="page-container package-final-card">
+          <div><span className="section-code section-code--light">READY TO GO?</span><h2>{item.name}<br/>ในวันที่คุณเลือกเอง.</h2></div>
+          <div><p>{item.priceNote}</p><Link href={`/packagetours-bhutan-booking?package=${item.slug}`} className="footer-cta-button">ขอราคาตามวันเดินทาง <span>↗</span></Link></div>
         </div>
       </section>
     </>

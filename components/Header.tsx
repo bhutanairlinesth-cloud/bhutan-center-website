@@ -1,16 +1,17 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
 import BrandMark from "./BrandMark";
 import { publicPaths } from "@/lib/public-paths";
 
 const nav = [
-  { href: publicPaths.packages, label: "Journeys" },
+  { href: publicPaths.packages, label: "แพ็กเกจ" },
+  { href: publicPaths.destinations, label: "สำรวจภูฏาน" },
   { href: "/bhutan-airlines", label: "Bhutan Airlines" },
-  { href: publicPaths.destinations, label: "Discover" },
-  { href: publicPaths.travelInfo, label: "Travel Guide" },
+  { href: publicPaths.hotels, label: "โรงแรม" },
+  { href: publicPaths.travelInfo, label: "ก่อนเดินทาง" },
   { href: publicPaths.journal, label: "Journal" },
 ];
 
@@ -21,33 +22,21 @@ export default function Header() {
 
   return (
     <header className="site-header">
-      <div className="header-frame">
-        <Link href="/" className="brand-link" onClick={() => setOpen(false)} aria-label="Bhutan Center home">
+      <div className="nav-wrap">
+        <Link href="/" className="nav-brand" onClick={() => setOpen(false)}>
           <BrandMark />
         </Link>
 
-        <nav className={`main-nav ${open ? "is-open" : ""}`} aria-label="Main navigation">
-          {nav.map((item) => (
-            <Link href={item.href} key={item.href} onClick={() => setOpen(false)}>
-              {item.label}
-            </Link>
-          ))}
-          <Link href={publicPaths.visa} onClick={() => setOpen(false)}>Visa</Link>
-          <Link href={publicPaths.contact} onClick={() => setOpen(false)}>Contact</Link>
+        <nav className={`nav-main ${open ? "open" : ""}`}>
+          {nav.map((item) => <Link key={item.href} href={item.href} onClick={() => setOpen(false)}>{item.label}</Link>)}
+          <Link className="mobile-nav-extra" href={publicPaths.contact} onClick={() => setOpen(false)}>ติดต่อเรา</Link>
         </nav>
 
-        <div className="header-actions">
-          <span className="language-pill">TH</span>
-          <Link className="button button--small header-cta" href={publicPaths.booking}>
-            Plan a trip <span>↗</span>
-          </Link>
-          <button
-            className="menu-toggle"
-            onClick={() => setOpen(!open)}
-            aria-label="Toggle navigation"
-            aria-expanded={open}
-          >
-            <span /><span />
+        <div className="nav-actions">
+          <Link className="nav-text-link" href="/partner">For Agent</Link>
+          <Link className="primary-pill" href={publicPaths.booking}>วางแผนทริป <span>↗</span></Link>
+          <button className="nav-toggle" onClick={() => setOpen(!open)} aria-label="Toggle navigation">
+            <i></i><i></i>
           </button>
         </div>
       </div>

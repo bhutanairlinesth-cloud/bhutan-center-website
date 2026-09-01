@@ -1,4 +1,4 @@
-# Bhutan Center V3 — Modern
+# Bhutan Center V4 — Interactive Map Dashboard
 
 Modern Next.js redesign for Bhutan Center, prepared for GitHub + Vercel and designed to connect to the existing Bhutan Pricing backend.
 
@@ -78,7 +78,14 @@ This build is specifically compatible with GitHub's browser uploader.
 It intentionally contains no folders named `[slug]` or `[...legacy]`.
 Public package URLs still remain `/packages/<slug>` through Next.js rewrites.
 
+## V4 redesign
 
-## V3 Design refresh
+The public website has been redesigned around an interactive Bhutan destination map inspired by a modern digital-dashboard experience.
 
-Modern editorial / luxury-travel front-end. SEO Center, Wix URL preservation, pricing integration hooks, sitemap, robots and admin features remain intact.
+Core destinations:
+- Paro
+- Thimphu
+- Punakha
+- Gangtey
+
+Home and package-detail pages let visitors click destinations to see attractions. Package detail pages only enable destinations included in that package. SEO Center, Wix legacy URL preservation, Supabase hooks, sitemap, robots, and the Pricing integration architecture remain in place.
